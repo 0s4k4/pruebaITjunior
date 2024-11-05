@@ -1,22 +1,44 @@
 <?php
-
 include 'config.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// if(isset($_POST["name"]) || isset($_POST["age"]) || isset($_POST["country"])){
-    $input=file_get_contents("php://input");
-    $decode=json_decode($input,true);
+// Leer y decodificar la solicitud JSON
+$input = file_get_contents("php://input");
+$decode = json_decode($input, true);
 
-    $name=$decode["name"];
-    $age=$decode["age"];
-    $country=$decode["country"];
+// Verificar si los datos necesarios están presentes
+if (isset($decode["name"], $decode["age"], $decode["country"])) {
+    $name = trim($decode["name"]);
+    $age = (int) $decode["age"]; // Convertir a entero para evitar inyecciones
+    $country = trim($decode["country"]);
 
-    $sql="INSERT INTO users (user_name,user_age,user_country) VALUES ('{$name}',{$age},'{$country}')";
-    $run_sql=mysqli_query($conn,$sql);
-    if($run_sql){
-        echo json_encode(["success"=>true,"message"=>"USUARIO AGREGADO CON EXITO"]);
-    }else{
-        echo json_encode(["success"=>false,"message"=>"PROBLEMA DEL SERVIDOR"]);
+    // Validar que los campos no estén vacíos y tengan el formato adecuado
+    if (empty($name) || !is_numeric($age) || empty($country)) {
+        echo json_encode(["success" => false, "message" => "Datos inválidos"]);
+        exit;
     }
-// }
 
+    // Usar consultas preparadas para evitar inyecciones de SQL
+    $stmt = $conn->prepare("INSERT INTO users (user_name, user_age, user_country) VALUES (?, ?, ?)");
+    if ($stmt) {
+        $stmt->bind_param("sis", $name, $age, $country);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            echo json_encode(["success" => true, "message" => "USUARIO AGREGADO CON ÉXITO"]);
+        } else {
+            echo json_encode(["success" => false, "message" => "Error al agregar el usuario"]);
+        }
+
+        $stmt->close();
+    } else {
+        echo json_encode(["success" => false, "message" => "Error en la preparación de la consulta"]);
+    }
+} else {
+    echo json_encode(["success" => false, "message" => "Datos incompletos"]);
+}
+
+// Cerrar la conexión
+$conn->close();
 ?>

@@ -5,6 +5,11 @@ $username="admin";
 $password="admin123";
 $database="pruebaIT";
 
-$conn=mysqli_connect($localhost,$username,$password,$database);
+$conn = new mysqli($localhost, $username, $password, $database);
+
+// Verifica la conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
 
 ?>

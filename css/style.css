@@ -97,6 +97,34 @@ tr>td{
     margin-bottom: 30px ;
     text-align: center;
 }
+
+/* delete */
+.modal_delete {
+    display: none; /* Mantener oculto por defecto */
+    position: fixed; /* Fijar el modal en la pantalla */
+    top: 0; /* Posicionar desde la parte superior */
+    left: 0; /* Posicionar desde la izquierda */
+    width: 100%; /* Ancho total de la ventana */
+    height: 100%; /* Altura total de la ventana */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    z-index: 1000; /* Asegurarse de que esté sobre otros elementos */
+    display: flex; /* Usar flexbox para centrar contenido */
+}
+
+.modal-body-delete {
+    background-color: #fff; /* Color de fondo del modal */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    max-width: 500px; /* Ancho máximo del modal */
+    margin: auto; /* Centrar horizontalmente */
+    position: relative; /* Para asegurar que el contenido esté en el flujo */
+    top: 50%; /* Ajuste inicial desde la parte superior */
+    transform: translateY(-50%); /* Mover el modal hacia arriba para centrarlo verticalmente */
+}
+
+
 label{
     margin: 10px 0px;
 }

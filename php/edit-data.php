@@ -1,18 +1,38 @@
 <?php
 
 include "config.php";
-if(isset($_GET["id"])){
-    $id=$_GET["id"];
-$sql="SELECT * FROM users WHERE id='{$id}'";
-$run_sql=mysqli_query($conn,$sql);
-$output=[];
-if(mysqli_num_rows($run_sql) > 0){
-    while($row=mysqli_fetch_assoc($run_sql)){
-        $output[]=$row;
+
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+
+    // Validar que el ID sea numérico
+    if (!is_numeric($id)) {
+        echo json_encode(["error" => "ID inválido"]);
+        exit();
     }
-}else{
-    $output["empty"]="empty";
-}
-echo json_encode($output);
+
+    // Preparar la consulta SQL para evitar inyección de SQL
+    $sql = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $sql->bind_param("i", $id); // 'i' indica que el parámetro es un entero
+
+    $sql->execute();
+    $result = $sql->get_result();
+    $output = [];
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $output[] = $row;
+        }
+    } else {
+        $output["empty"] = "empty";
+    }
+
+    echo json_encode($output);
+
+    // Cerrar la consulta y la conexión
+    $sql->close();
+    $conn->close();
+} else {
+    echo json_encode(["error" => "ID no especificado"]);
 }
 ?>
