@@ -1,6 +1,6 @@
 let create = document.querySelector("#create");
-let modal = document.querySelector("#create-student");
-let update_model = document.querySelector("#update-student");
+let modal = document.querySelector("#create-user");
+let update_model = document.querySelector("#update-user");
 let close = document.querySelector("#close")
 let update_close = document.querySelector("#update_close")
 let save = document.querySelector("#save");
@@ -21,7 +21,7 @@ update_close.addEventListener("click", () => {
 })
 
 
-// create Student
+// create user
 
 save.addEventListener("click", async () => {
     try {
@@ -46,7 +46,7 @@ save.addEventListener("click", async () => {
             age = "";
             country = "";
             modal.style.display = "none";
-            getStudents();
+            getUsers();
             getTotalCount();
             setTimeout(() => {
                 success.style.display = "none";
@@ -74,9 +74,9 @@ save.addEventListener("click", async () => {
     }
 });
 
-// select Student
+// select user
 
-const getStudents = async () => {
+const getUsers = async () => {
     try {
         const tbody = document.querySelector("#tbody");
         let tr = "";
@@ -95,11 +95,11 @@ const getStudents = async () => {
                 tr += `
             <tr>
             <td>${parseInt(i) + 1}</td>
-            <td>${output[i].std_name}</td>
-            <td>${output[i].std_age}</td>
-            <td>${output[i].std_country}</td>
-            <td><button onclick="editStudent(${output[i].id})" class="btn btn-success">Edit</button></td>
-            <td><button onclick="deleteStudent(${output[i].id})"  class="btn btn-danger">Delete</button></td>
+            <td>${output[i].user_name}</td>
+            <td>${output[i].user_age}</td>
+            <td>${output[i].user_country}</td>
+            <td><button onclick="editUser(${output[i].id})" class="btn btn-success">EDITAR</button></td>
+            <td><button onclick="deleteUser(${output[i].id})"  class="btn btn-danger">CERRAR</button></td>
             </tr>`
             }
         }
@@ -109,12 +109,12 @@ const getStudents = async () => {
     }
 }
 
-getStudents();
+getUsers();
 
 
-// edit students
+// edit users
 
-const editStudent = async (id) => {
+const editUser = async (id) => {
     update_model.style.display = "flex";
 
     const res = await fetch(`php/edit-data.php?id=${id}`, {
@@ -125,15 +125,15 @@ const editStudent = async (id) => {
     if (output["empty"] !== "empty") {
         for (var i in output) {
             document.querySelector("#id").value = output[i].id
-            document.querySelector("#edit_name").value = output[i].std_name
-            document.querySelector("#edit_age").value = output[i].std_age
-            document.querySelector("#edit_country").value = output[i].std_country
+            document.querySelector("#edit_name").value = output[i].user_name
+            document.querySelector("#edit_age").value = output[i].user_age
+            document.querySelector("#edit_country").value = output[i].user_country
         }
     }
 
 }
 
-// update student
+// update user
 
 update.addEventListener("click", async () => {
     let id = document.querySelector("#id").value;
@@ -159,7 +159,7 @@ update.addEventListener("click", async () => {
         age = "";
         country = "";
         update_model.style.display = "none";
-        getStudents();
+        getUsers();
         setTimeout(() => {
             success.style.display = "none";
             success.innerText = "";
@@ -176,9 +176,9 @@ update.addEventListener("click", async () => {
 
 })
 
-// delete student
+// delete user
 
-const deleteStudent = async (id) => {
+const deleteUser = async (id) => {
     const res = await fetch("php/delete-data.php?id=" + id, {
         method: "GET",
     });
@@ -190,7 +190,7 @@ const deleteStudent = async (id) => {
             success.style.display = "none";
             success.innerText = "";
         }, 1000)
-        getStudents();
+        getUsers();
         getTotalCount();
     } else {
         error.style.display = "flex";
@@ -202,7 +202,7 @@ const deleteStudent = async (id) => {
     }
 }
 
-// get total count  students;
+// get total count  users;
 
 const getTotalCount = async () => {
     let total = document.querySelector("#total");

@@ -10,13 +10,13 @@ $age=$decode['age'];
 $country=$decode['country'];
 
 
-$sql="UPDATE students SET std_name='{$name}', std_age='{$age}', std_country='{$country}' WHERE id='{$id}'";
+$sql="UPDATE users SET user_name='{$name}', user_age='{$age}', user_country='{$country}' WHERE id='{$id}'";
 $run_sql=mysqli_query($conn,$sql);
 
 if($run_sql){
-    echo json_encode(["success"=>true,"message"=>"Student Update Succcessfully"]);
+    echo json_encode(["success"=>true,"message"=>"USUARIO ACTUALIZADO CON EXITO"]);
 }else{
-    echo json_encode(["success"=>false,"message"=>"Server Problem"]);
+    echo json_encode(["success"=>false,"message"=>"PROBLEMA DEL SERVIDOR"]);
 }
 
 ?>

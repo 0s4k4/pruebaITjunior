@@ -18,14 +18,14 @@
     </div>
     <div class="container-fluid">
         <div class="container">
-            <h1>Crud with Javascript fetch api</h1>
+            <h1>CRUD DE USUARIOS</h1>
         </div>
     </div>
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h3>Students ( <span id="total"></span> )</h4>
-                    <button class="btn btn-primary" id="create">Create</button>
+                <h3>Usuarios ( <span id="total"></span> )</h4>
+                    <button class="btn btn-primary" id="create">CREAR USUARIO</button>
             </div>
         </div>
     </div>
@@ -36,11 +36,11 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Country</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Pais</th>
+                        <th>Editar</th>
+                        <th>Elimninar</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -53,49 +53,49 @@
     <!-- create student model -->
 
     <!-- <div class="container"> -->
-    <div class="modal" id="create-student">
+    <div class="modal" id="create-user">
         <div class="modal-body">
-            <h3>Create Student</h3>
+            <h3>Crear usuario</h3>
             <div class="form-group">
-                <label for=""><b>Enter your Name</b></label>
-                <input type="text" placeholder="Enter your name" id="name" class="form-control">
+                <label for=""><b>NOMBRE</b></label>
+                <input type="text" placeholder="Ingresa el nombre del usuario" id="name" class="form-control">
             </div>
             <div class="form-group">
-                <label for=""><b>Enter your Age</b></label>
-                <input type="number" placeholder="Enter your age" id="age" class="form-control">
+                <label for=""><b>EDAD</b></label>
+                <input type="number" placeholder="Ingresa la edad del usuario" id="age" class="form-control">
             </div>
             <div class="form-group">
-                <label for=""><b>Enter your Country</b></label>
-                <input type="text" placeholder="Enter your country" id="country" class="form-control">
+                <label for=""><b>PAIS</b></label>
+                <input type="text" placeholder="Ingresa el pais del usuario" id="country" class="form-control">
             </div>
             <div class="form-group buttons">
-                <button class="btn btn-success" type="submit" id="save">Save</button>
-                <button class="btn btn-danger" type="submit" id="close">Close</button>
+                <button class="btn btn-success" type="submit" id="save">Guardar</button>
+                <button class="btn btn-danger" type="submit" id="close">Cerrar</button>
             </div>
         </div>
     </div>
     <!-- </div> -->
 
     <!-- edit student -->
-    <div class="modal" id="update-student">
+    <div class="modal" id="update-user">
         <div class="modal-body">
-            <h3>Update Student</h3>
+            <h3>ACTUALIZAR USUARIO</h3>
             <div class="form-group">
-                <label for=""><b>Enter your Name</b></label>
-                <input type="text" placeholder="Enter your name" id="edit_name" class="form-control">
+                <label for=""><b>NOMBRE</b></label>
+                <input type="text" placeholder="ingresa el nombre del usuario" id="edit_name" class="form-control">
                 <input type="hidden" placeholder="Id" id="id" class="form-control">
             </div>
             <div class="form-group">
-                <label for=""><b>Enter your Age</b></label>
-                <input type="number" placeholder="Enter your age" id="edit_age" class="form-control">
+                <label for=""><b>EDAD</b></label>
+                <input type="number" placeholder="Ingresa la edad del usuario" id="edit_age" class="form-control">
             </div>
             <div class="form-group">
-                <label for=""><b>Enter your Country</b></label>
-                <input type="text" placeholder="Enter your country" id="edit_country" class="form-control">
+                <label for=""><b>PAIS</b></label>
+                <input type="text" placeholder="Ingresa el pais del usuario" id="edit_country" class="form-control">
             </div>
             <div class="form-group buttons">
-                <button class="btn btn-success" id="update" type="submit">Update</button>
-                <button class="btn btn-danger" type="submit" id="update_close">Close</button>
+                <button class="btn btn-success" id="update" type="submit">ACTUALZIAR</button>
+                <button class="btn btn-danger" type="submit" id="update_close">CERRAR</button>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
 }
 .container-fluid{
     padding: 20px;
-    background-color: #B53471;
+    background-color: #430771c9;
 }
 .container-fluid .container{
     text-align: center;
@@ -142,4 +142,16 @@ label{
     .table-responsive{
         overflow-x: scroll;
     }
+}
+
+.error-text {
+    font-size: 12px;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    color: rgb(92, 9, 9);
+}
+
+.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
 }

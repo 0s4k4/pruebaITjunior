@@ -3,7 +3,7 @@
 include "config.php";
 if(isset($_GET["id"])){
     $id=$_GET["id"];
-$sql="SELECT * FROM students WHERE id='{$id}'";
+$sql="SELECT * FROM users WHERE id='{$id}'";
 $run_sql=mysqli_query($conn,$sql);
 $output=[];
 if(mysqli_num_rows($run_sql) > 0){
