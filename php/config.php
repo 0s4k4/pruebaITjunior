@@ -1,6 +1,6 @@
 <?php
 
-$localhost="192.168.100.37";
+$localhost="172.29.77.95";
 $username="admin";
 $password="admin123";
 $database="pruebaIT";
