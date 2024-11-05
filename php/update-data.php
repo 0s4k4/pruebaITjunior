@@ -11,21 +11,35 @@ $decode = json_decode($input, true);
 if (isset($decode['id'], $decode['name'], $decode['age'], $decode['country']) &&
     !empty($decode['id']) && !empty($decode['name']) && !empty($decode['age']) && !empty($decode['country'])) {
 
-    // Escapar y sanitizar los datos para evitar inyección de SQL
-    $id = mysqli_real_escape_string($conn, $decode['id']);
-    $name = mysqli_real_escape_string($conn, $decode['name']);
-    $age = (int) $decode['age']; // Convertir a entero para mayor seguridad
-    $country = mysqli_real_escape_string($conn, $decode['country']);
+    // Convertir el ID a entero y validar que sea un número
+    $id = (int) $decode['id'];
+    if ($id <= 0) {
+        echo json_encode(["success" => false, "message" => "ID inválido."]);
+        exit;
+    }
 
-    // Preparar la consulta de actualización
-    $sql = "UPDATE users SET user_name='$name', user_age=$age, user_country='$country' WHERE id='$id'";
-    $run_sql = mysqli_query($conn, $sql);
+    // Sanitizar el nombre y el país
+    $name = trim($decode['name']);
+    $country = trim($decode['country']);
+    
+    // Validar que la edad sea un número entero
+    $age = (int) $decode['age'];
+    if ($age <= 0) {
+        echo json_encode(["success" => false, "message" => "La edad debe ser un número positivo."]);
+        exit;
+    }
 
-    if ($run_sql) {
+    // Preparar la consulta de actualización utilizando prepared statements
+    $stmt = $conn->prepare("UPDATE users SET user_name = ?, user_age = ?, user_country = ? WHERE id = ?");
+    $stmt->bind_param("sisi", $name, $age, $country, $id); // s = string, i = integer
+
+    if ($stmt->execute()) {
         echo json_encode(["success" => true, "message" => "USUARIO ACTUALIZADO CON ÉXITO"]);
     } else {
         echo json_encode(["success" => false, "message" => "PROBLEMA DEL SERVIDOR"]);
     }
+
+    $stmt->close();
 } else {
     echo json_encode(["success" => false, "message" => "DATOS INVÁLIDOS O INCOMPLETOS"]);
 }

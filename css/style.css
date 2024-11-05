@@ -1,39 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
 
-*{
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
     font-family: 'Fredoka', sans-serif;
 }
-.container-fluid{
+
+.container-fluid {
     padding: 20px;
     background-color: #430771c9;
 }
-.container-fluid .container{
+
+.container-fluid .container {
     text-align: center;
     color: white;
 }
 
-.container{
+.container {
     width: 80%;
     margin: 0px auto;
 }
 
-.card{
+.card {
     border: 2px solid #6F1E51;
     width: 100%;
     padding: 10px 5px;
     margin: 20px 0px;
-    border-radius:10px;
+    border-radius: 10px;
 }
-.card-body{
+
+.card-body {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.btn{
+.btn {
     outline: none;
     border: none;
     padding: 10px 15px;
@@ -41,115 +44,125 @@
     font-size: 18px;
     cursor: pointer;
 }
-.btn-primary{
+
+.btn-primary {
     background-color: #0652DD;
     color: white;
 }
-.btn:active{
-    transform:scale(.9)
+
+.btn:active {
+    transform: scale(.9);
 }
 
-table{
+table {
     width: 100%;
     border: 2px solid #eee;
     border-collapse: collapse;
 }
-thead tr th{
+
+thead tr th {
     border: 2px solid #eee;
     padding: 10px !important;
 }
-tr{
+
+tr {
     border: 2px solid #eee;
     width: 100%;
     text-align: center;
 }
-tr>td{
+
+tr > td {
     border: 2px solid #eee;
     padding: 10px !important;
-
 }
 
-.btn-success{
+.btn-success {
     background-color: #006266;
     color: white;
 }
-.btn-danger{
+
+.btn-danger {
     background-color: #EA2027;
     color: white;
 }
-.modal{
-    position:fixed;
+
+.modal {
+    position: fixed;
     top: 0;
     background-color: rgba(0, 0, 0, 0.842);
     width: 100%;
     height: 100vh;
-    display:none;
+    display: none;
     justify-content: center;
-    align-items:center;
+    align-items: center;
 }
-.modal-body{
+
+.modal-body {
     background-color: white;
     width: 50%;
     padding: 30px;
     border-radius: 10px;
 }
-.modal-body h3{
-    margin-bottom: 30px ;
+
+.modal-body h3 {
+    margin-bottom: 30px;
     text-align: center;
 }
 
-/* delete */
+/* Estilos para el modal de eliminar */
 .modal_delete {
-    display: none; /* Mantener oculto por defecto */
-    position: fixed; /* Fijar el modal en la pantalla */
-    top: 0; /* Posicionar desde la parte superior */
-    left: 0; /* Posicionar desde la izquierda */
-    width: 100%; /* Ancho total de la ventana */
-    height: 100%; /* Altura total de la ventana */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    z-index: 1000; /* Asegurarse de que esté sobre otros elementos */
-    display: flex; /* Usar flexbox para centrar contenido */
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    display: flex;
 }
 
 .modal-body-delete {
-    background-color: #fff; /* Color de fondo del modal */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
-    max-width: 500px; /* Ancho máximo del modal */
-    margin: auto; /* Centrar horizontalmente */
-    position: relative; /* Para asegurar que el contenido esté en el flujo */
-    top: 50%; /* Ajuste inicial desde la parte superior */
-    transform: translateY(-50%); /* Mover el modal hacia arriba para centrarlo verticalmente */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-
-label{
+label {
     margin: 10px 0px;
 }
-.form-group{
+
+.form-group {
     margin: 20px 0px;
 }
-.form-control{
+
+.form-control {
     width: 100%;
     outline: none;
     border: none;
-    background-color:none;
+    background-color: none;
     border-bottom: 1px solid #006266;
     padding: 10px 0px;
     font-size: 18px;
 }
 
-.buttons{
+.buttons {
     display: flex;
     justify-content: space-between;
 }
 
-.alerts{
+.alerts {
 }
-.alert{
-    position:fixed;
+
+.alert {
+    position: fixed;
     top: 10px;
     right: 20px;
     padding: 10px 20px;
@@ -157,18 +170,70 @@ label{
     color: white;
     font-size: 18px;
 }
-.alert-success{
+
+.alert-success {
     background-color: rgb(31, 192, 31);
-    display:none;
+    display: none;
 }
 
-.alert-danger{
+.alert-danger {
     background-color: rgb(194, 27, 27);
-    display:none;
+    display: none;
 }
-@media screen and (max-width:700px) {
-    .table-responsive{
+
+@media screen and (max-width: 700px) {
+    .table-responsive {
         overflow-x: scroll;
+    }
+
+    .modal-body {
+        width: 90%;
+        padding: 15px;
+        margin: 10% auto;
+    }
+
+    .form-control {
+        padding: 8px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 90%; /* Ampliar el contenedor en tablets */
+    }
+
+    .modal-body {
+        width: 70%; /* Ajustar ancho del modal para tablets */
+    }
+
+    .card {
+        margin: 15px 0; /* Espaciado reducido entre tarjetas */
+    }
+
+    .btn {
+        font-size: 16px; /* Reducir el tamaño de fuente en botones */
+    }
+
+    .form-control {
+        font-size: 16px; /* Reducir el tamaño de fuente en inputs */
+    }
+
+    .alert {
+        font-size: 16px; /* Reducir el tamaño de fuente en alertas */
+        padding: 8px 16px; /* Ajustar padding en alertas */
+    }
+
+    .error-text {
+        font-size: 14px; /* Ajustar tamaño de texto de error */
     }
 }
 

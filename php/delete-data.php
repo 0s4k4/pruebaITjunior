@@ -1,36 +1,27 @@
 <?php
 include "config.php";
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-// Obtener el cuerpo de la solicitud
-$data = json_decode(file_get_contents("php://input"));
+$input = file_get_contents("php://input");
+$decode = json_decode($input, true);
 
-// Validar que el ID esté presente y sea numérico
-if (!isset($data->id) || !is_numeric($data->id)) {
-    echo json_encode(["success" => false, "message" => "ID inválido"]);
-    exit();
+$id = isset($decode['id']) ? (int)$decode['id'] : null;
+
+// Validar que el ID no sea nulo
+if ($id === null) {
+    echo json_encode(["success" => false, "message" => "El ID es obligatorio."]);
+    exit;
 }
 
-$id = (int)$data->id; // Convertir a entero para mayor seguridad
+// Prepared statement
+$stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
+$stmt->bind_param("i", $id);
 
-// Preparar la consulta SQL para evitar inyección de SQL
-$sql = $conn->prepare("DELETE FROM users WHERE id = ?");
-$sql->bind_param("i", $id);
-
-// Ejecutar la consulta y verificar el resultado
-if ($sql->execute()) {
-    if ($sql->affected_rows > 0) {
-        echo json_encode(["success" => true, "message" => "USUARIO ELIMINADO CON ÉXITO"]);
-    } else {
-        echo json_encode(["success" => false, "message" => "No se encontró el usuario o ya fue eliminado"]);
-    }
+if ($stmt->execute()) {
+    echo json_encode(["success" => true, "message" => "USUARIO ELIMINADO CON ÉXITO"]);
 } else {
-    // Registro del error en un archivo de log (buena práctica)
-    error_log("Error en la consulta: " . $conn->error);
     echo json_encode(["success" => false, "message" => "PROBLEMA DEL SERVIDOR"]);
 }
 
-$sql->close();
+$stmt->close();
 $conn->close();
 ?>
